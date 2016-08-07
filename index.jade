@@ -1,4 +1,6 @@
 extend partials/layout
 
 block content				
-	
+	.outer
+		each value in ["top-left", "top-right", "bottom-left", "bottom-right"]
+			.outer__corner(class="outer__corner--"+value)
