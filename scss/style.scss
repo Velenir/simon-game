@@ -31,23 +31,43 @@ div, p, span {
 }
 
 $corner-margin: 5px;
+$outer-size: 400px;
+$controls-size: 30%;
 
 .outer {
-	width: 300px;
-	height: 300px;
+	width: $outer-size;
+	height: $outer-size;
 	padding: 1rem;
+	position: relative;
 
 	&__corner {
 		width: calc(50% - 2 * #{$corner-margin});
 		height: calc(50% - 2 * #{$corner-margin});
 		margin: $corner-margin;
+		border-radius: 10px;
 		display: inline-block;
 
-		@each $cn in top-left, top-right, bottom-right, bottom-left {
+		@each $cn, $cl in (top-left: #00a74a, top-right: #9f0f17, bottom-right: #094a8f, bottom-left: #cca707) {
 			&--#{$cn} {
 				background: lightgreen;
 				border-#{$cn}-radius: 100%;
+				$dashInd: str_index($cn, "-");
+				background-image: linear-gradient(to #{str_slice($cn, 0, $dashInd - 1)} #{str_slice($cn, $dashInd + 1)}, lighten($cl, 20%), $cl);
 			}
 		}
+	}
+
+	&__controls {
+		position: absolute;
+		left: 50% - $controls-size/2;
+		top: 50% - $controls-size/2;
+		width: $controls-size;
+		height: $controls-size;
+		border-radius: 50%;
+		background-color: lightyellow;
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 }

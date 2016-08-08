@@ -4,3 +4,10 @@ block content
 	.outer
 		each value in ["top-left", "top-right", "bottom-left", "bottom-right"]
 			.outer__corner(class="outer__corner--"+value)
+		
+		.outer__controls
+			button#start(type="button") Start
+			input#on-off(type="checkbox")
+			input#strict(type="checkbox")
+			
+			
