@@ -30,8 +30,32 @@ div, p, span {
 	outline: 1px dotted black;
 }
 
-$corner-margin: 5px;
-$outer-size: 400px;
+// REMOVE
+
+.axis {
+	position: relative;
+}
+
+.axis::before {
+	position: absolute;
+	left: 50%;
+	top: 0;
+	height: 100%;
+	content: "";
+	border-left: 1px dotted black;
+}
+
+.axis::after {
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 100%;
+	content: "";
+	border-top: 1px dotted black;
+}
+
+$corner-margin: 6px;
+$outer-size: 600px;
 $controls-size: 30%;
 
 .outer {
@@ -39,20 +63,36 @@ $controls-size: 30%;
 	height: $outer-size;
 	padding: 1rem;
 	position: relative;
+	background-color: #333;
+	border-radius: 43%/40%;
 
 	&__corner {
 		width: calc(50% - 2 * #{$corner-margin});
 		height: calc(50% - 2 * #{$corner-margin});
 		margin: $corner-margin;
+		vertical-align: middle;
 		border-radius: 10px;
 		display: inline-block;
+		box-shadow: 0 0 10px white, inset 0 0 15px 10px gray;
+
+		&:active {
+			box-shadow: inset 0 0 15px 2px gray;
+		}
 
 		@each $cn, $cl in (top-left: #00a74a, top-right: #9f0f17, bottom-right: #094a8f, bottom-left: #cca707) {
 			&--#{$cn} {
-				background: lightgreen;
+				background-color: $cl;
 				border-#{$cn}-radius: 100%;
 				$dashInd: str_index($cn, "-");
-				background-image: linear-gradient(to #{str_slice($cn, 0, $dashInd - 1)} #{str_slice($cn, $dashInd + 1)}, lighten($cl, 20%), $cl);
+				background-image: linear-gradient(to #{str_slice($cn, 0, $dashInd - 1)} #{str_slice($cn, $dashInd + 1)}, lighten($cl, 20%), rgba($cl, 0.5));
+				// background-image: linear-gradient(to #{str_slice($cn, 0, $dashInd - 1)} #{str_slice($cn, $dashInd + 1)}, lighten($cl, 20%), rgba($cl, 0.46)), radial-gradient(circle, yellow, yellow 27%, rgba(255, 255, 255, 0) 60%);
+				// background-image: linear-gradient(to top right, #eb2934, rgba(159, 15, 23, 0.46)), radial-gradient(circle, yellow, rgba(255, 255, 255, 0));
+				// background-repeat: no-repeat;
+				// background-position: 0% 0%, -179% 421%;
+				// background-size: auto, 89%;
+				// animation: lamp 2s infinite alternate;
+
+				// box-shadow: 0 0 10px white, inset 0 0 15px 10px gray; */
 			}
 		}
 	}
@@ -65,9 +105,17 @@ $controls-size: 30%;
 		height: $controls-size;
 		border-radius: 50%;
 		background-color: lightyellow;
+		border: 8px solid #333;
 
 		display: flex;
 		align-items: center;
 		justify-content: center;
+	}
+}
+
+@keyframes lamp {
+	to {
+		background-color: yellow;
+		box-shadow: 0 0 10px white, inset 0 0 15px 10px gray;
 	}
 }
