@@ -26,24 +26,25 @@ function animateChain2(...cornerNumbers) {
 
 	// chain promises that will get resolved on animation finish
 	for(let num of cornerNumbers) {
-		const player = corners[num].animPlayer;
+		const {animPlayer, soundPlayer} = corners[num];
 
 		chainPromise = chainPromise.then(() => {
 			if(stopped) {
-				console.log("STOPPED BEFORE", player.effect.target);
+				console.log("STOPPED BEFORE", animPlayer.effect.target);
 				throw new Error("Animation interrupted");
 			}
-			console.log("START ON", player.effect.target);
+			console.log("START ON", animPlayer.effect.target);
 			// previous promise resolved, start next animation
-			player.play();
+			animPlayer.play();
+			soundPlayer.play();
 
 			// asynchrously create next promise at the point when it's needed
 			// creating all promises in the loop and then chaining wouldn't allow for same corner to appear twice
 			// as .onfinish would get overwritten
 			return new Promise(function (resolve) {
-				player.onfinish = resolve;
+				animPlayer.onfinish = resolve;
 			})	// reset finish event handler
-			.then(() => player.onfinish = null);
+			.then(() => animPlayer.onfinish = null);
 		});
 	}
 
