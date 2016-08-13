@@ -24,10 +24,14 @@ body {
 	justify-content: center;
 }
 
+label {
+	cursor: pointer;
+}
+
 // REMOVE
 
 div, p, span {
-	outline: 1px dotted black;
+	// outline: 1px dotted black;
 }
 
 // REMOVE
@@ -56,7 +60,7 @@ div, p, span {
 
 $corner-margin: 6px;
 $outer-size: 600px;
-$controls-size: 30%;
+$controls-size: 50%;
 
 .outer {
 	width: $outer-size;
@@ -97,7 +101,7 @@ $controls-size: 30%;
 		}
 	}
 
-	&__controls {
+	&__center {
 		position: absolute;
 		left: 50% - $controls-size/2;
 		top: 50% - $controls-size/2;
@@ -106,10 +110,14 @@ $controls-size: 30%;
 		border-radius: 50%;
 		background-color: lightyellow;
 		border: 8px solid #333;
-
 		display: flex;
-		align-items: center;
-		justify-content: center;
+		flex-flow: column;
+		text-align: center;
+		background-color: #4297aa;
+		color: #b0c2c5;
+		text-shadow: 1px 0 1px #5c8c96, -1px 0 1px #4e7882, 0 1px 1px #5c8c96, 0 -1px 1px #4e7882;
+		box-shadow: inset 0 0 10px 10px gray, inset 0 0 7px 7px black;
+		padding: 12px;
 	}
 }
 
@@ -117,5 +125,127 @@ $controls-size: 30%;
 	to {
 		background-color: yellow;
 		box-shadow: 0 0 10px white, inset 0 0 15px 10px gray;
+	}
+}
+
+.title {
+	font-size: 4em;
+	margin: 25px 0 0;
+	font-family: monospace;
+
+	&__copyright {
+		font-size: 0.3em;
+	}
+}
+
+.controls {
+	flex-grow: 1;
+	display: flex;
+	flex-flow: column;
+	user-select: none;
+
+	&__ingame {
+		display: flex;
+		justify-content: space-around;
+		align-items: flex-end;
+	}
+
+	&__power {
+		margin-top: 20px;
+
+		> * {
+			display: inline-block;
+			margin: 0 5px;
+			vertical-align: top;
+		}
+	}
+}
+
+.rounds {
+	&__display {
+		border: 5px solid gray;
+		border-radius: 5px;
+		background-color: black;
+		box-shadow: 0 0 2px 1px gray;
+		color: red;
+		font-size: 2em;
+		padding: 5px;
+		position: relative;
+		display: inline-block;
+		text-shadow: none;
+	}
+}
+
+// .toggle {
+// 	position: relative;
+// 	width: 20px;
+// 	height: 20px;
+// 	border-radius: 50%;
+//
+// 	&--start, &--strict {
+// 		margin: 0 20px;
+// 	}
+//
+// }
+
+.label {
+	text-transform: uppercase;
+	margin: 5px 0 0;
+}
+
+.toggle {		text-shadow: 1px 1px 1px #5c8c96, -1px -1px 1px #4e7882;
+
+	input[type="checkbox"] {
+		display: none;
+	}
+
+	&--start__button, &--strict__visible {
+		border: 2px solid wheat;
+		border-radius: 50%;
+		height: 1.5rem;
+		width: 1.5rem;
+		display: inline-block;
+		background-color: #b08894;
+		box-shadow: 0 0 8px 2px gray;
+		margin-bottom: 14px;
+		transition: all 0.3s;
+	}
+
+	&--start__button:active {
+		box-shadow: 0 0 8px 2px gray, inset 0 0 5px black;
+		background-color: #8e5d6c;
+	}
+
+	&--strict__visible {
+		vertical-align: text-bottom;
+
+		input[type="checkbox"]:checked + &, &:active {
+			box-shadow: 0 0 8px 2px gray, inset 0 0 5px black;
+			background-color: yellow;
+		}
+	}
+
+	&--power {
+		width: 2 * 1.5rem;
+		height: 1.5rem;
+		background-color: black;
+		text-align: left;
+		padding: 1px;
+
+		&__visible {
+			background-color: #3193DE;
+			width: 50%;
+			height: 100%;
+			// border: 2px solid gray;
+			border-radius: 2px;
+			display: inline-block;
+			position: relative;
+			left: 0;
+			transition: left 0.2s;
+
+			input[type="checkbox"]:checked + & {
+				left: 50%;
+			}
+		}
 	}
 }

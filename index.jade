@@ -5,9 +5,27 @@ block content
 		each value in ["top-left", "top-right", "bottom-left", "bottom-right"]
 			.outer__corner(class="outer__corner--"+value)
 		
-		.outer__controls
-			button#start(type="button") Start
-			input#on-off(type="checkbox")
-			input#strict(type="checkbox")
+		.outer__center
+			.title Simon
+				sup.title__copyright ®				
+			.controls
+				.controls__ingame
+					.rounds
+						.rounds__display 01
+						h4.label.rounds__label round
+					.toggle.toggle--start
+						button#start.toggle--start__button(type="button")
+						h4.label.toggle--start__label Start
+					div
+						label.toggle.toggle--strict
+							input#strict.toggle--strict__check(type="checkbox")
+							span.toggle--strict__visible
+						h4.label.toggle--strict__label Strict
+				.controls__power
+					h4.label.toggle--power__label Off
+					label.toggle.toggle--power
+						input#power.toggle--power__check(type="checkbox")
+						span.toggle--power__visible
+					h4.label.toggle--power__label On
 			
 			
