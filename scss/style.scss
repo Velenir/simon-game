@@ -34,5 +34,6 @@ div, p, span {
 	// outline: 1px dotted black;
 }
 
+@import "partials/fonts";
 @import "variables";
 @import 'partials/outer', 'partials/controls', 'partials/toggles';
