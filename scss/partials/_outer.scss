@@ -1,0 +1,58 @@
+.outer {
+	width: $outer-size;
+	height: $outer-size;
+	padding: 1rem;
+	position: relative;
+	background-color: #333;
+	border-radius: 43%/40%;
+
+	&__corner {
+		width: calc(50% - 2 * #{$corner-margin});
+		height: calc(50% - 2 * #{$corner-margin});
+		margin: $corner-margin;
+		vertical-align: middle;
+		border-radius: 10px;
+		display: inline-block;
+		box-shadow: 0 0 10px white, inset 0 0 15px 10px gray;
+
+		&:active {
+			box-shadow: inset 0 0 15px 2px gray;
+		}
+
+		@each $cn, $cl in (top-left: #00a74a, top-right: #9f0f17, bottom-right: #094a8f, bottom-left: #cca707) {
+			&--#{$cn} {
+				background-color: $cl;
+				border-#{$cn}-radius: 100%;
+				$dashInd: str_index($cn, "-");
+
+				background-image: linear-gradient(to #{str_slice($cn, 0, $dashInd - 1)} #{str_slice($cn, $dashInd + 1)}, lighten($cl, 20%), rgba($cl, 0.5));
+			}
+		}
+	}
+
+	&__center {
+		position: absolute;
+		left: 50% - $controls-size/2;
+		top: 50% - $controls-size/2;
+		width: $controls-size;
+		height: $controls-size;
+		border-radius: 50%;
+		background-color: lightyellow;
+		border: 8px solid #333;
+		display: flex;
+		flex-flow: column;
+		text-align: center;
+		background-color: #4297aa;
+		color: #b0c2c5;
+		text-shadow: 1px 0 1px #5c8c96, -1px 0 1px #4e7882, 0 1px 1px #5c8c96, 0 -1px 1px #4e7882;
+		box-shadow: inset 0 0 10px 10px gray, inset 0 0 7px 7px black;
+		padding: 12px;
+	}
+}
+
+@keyframes lamp {
+	to {
+		background-color: yellow;
+		box-shadow: 0 0 10px white, inset 0 0 15px 10px gray;
+	}
+}

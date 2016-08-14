@@ -1,0 +1,47 @@
+.title {
+	font-size: 4em;
+	margin: 25px 0 0;
+	font-family: monospace;
+
+	&__copyright {
+		font-size: 0.3em;
+	}
+}
+
+.controls {
+	flex-grow: 1;
+	display: flex;
+	flex-flow: column;
+	user-select: none;
+
+	&__ingame {
+		display: flex;
+		justify-content: space-around;
+		align-items: flex-end;
+	}
+
+	&__power {
+		margin-top: 20px;
+
+		> * {
+			display: inline-block;
+			margin: 0 5px;
+			vertical-align: top;
+		}
+	}
+}
+
+.rounds {
+	&__display {
+		border: 5px solid gray;
+		border-radius: 5px;
+		background-color: black;
+		box-shadow: 0 0 2px 1px gray;
+		color: red;
+		font-size: 2em;
+		padding: 5px;
+		position: relative;
+		display: inline-block;
+		text-shadow: none;
+	}
+}
