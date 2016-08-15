@@ -16,7 +16,7 @@ const src = {
 	scssPartials: 'scss/partials/*.scss',
 	jade: '*.jade',
 	jadePartials: 'partials/*jade',
-	js: 'js/*.js'
+	js: ['js/game.js', 'js/*.js']
 };
 
 const dist = {

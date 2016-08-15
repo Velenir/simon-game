@@ -18,9 +18,9 @@ function animateChain(...cornerNumbers) {
 	return promise;
 }
 
-let stopped;
+let animationStopped;
 function animateChain2(...cornerNumbers) {
-	stopped = false;
+	animationStopped = false;
 	// immediately resolved promise
 	let chainPromise = Promise.resolve();
 
@@ -29,7 +29,7 @@ function animateChain2(...cornerNumbers) {
 		const {animPlayer, soundPlayer} = corners[num];
 
 		chainPromise = chainPromise.then(() => {
-			if(stopped) {
+			if(animationStopped) {
 				console.log("STOPPED BEFORE", animPlayer.effect.target);
 				throw new Error("Animation interrupted");
 			}
@@ -51,11 +51,15 @@ function animateChain2(...cornerNumbers) {
 	// start the chain
 	corners[cornerNumbers[0]].animPlayer.play();
 
-	return chainPromise.catch(err => console.log(err));
+	return chainPromise.then(() => {return {finished: true};})
+		.catch(err => {
+			console.log(err);
+			return {interrupted: true};
+		});
 }
 
 function stopAnimations() {
-	stopped = true;
+	animationStopped = true;
 	for(let anim of document.timeline.getAnimations()) {
 		anim.finish();
 		console.log("anim finished");

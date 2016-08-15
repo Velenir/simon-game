@@ -27,6 +27,8 @@ function attachAnimations() {
 		cn.soundPlayer = new Audio(`https://s3.amazonaws.com/freecodecamp/simonSound${i+1}.mp3`);
 
 		cn.onmousedown = cornerClicked;
+
+		cn.ind = i;
 	}
 }
 
@@ -34,6 +36,12 @@ attachAnimations();
 
 
 function cornerClicked() {
+	// only animate if game is in progress
+	if(!simonGame.on) return;
+
+	// don't play corner.sound if wrong user input
+	if(!userTurn(this.ind)) return;
+
 	if(this.animPlayer.playState === "running") this.animPlayer.cancel();
 	this.animPlayer.play();
 
