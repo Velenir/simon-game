@@ -46,12 +46,25 @@ function userTurn(ind) {
 				simonGame.stop();
 				display.textContent = "!!";
 				// restart from round 1
-				errorSound.play().then(()=>setTimeout(startGame.bind(null, true), LONG_DELAY));
+
+				// HTMLMediaElement.play() doesn't return a Promise in Firefox
+				// due to bug 1244768
+				// errorSound.play().then(()=>setTimeout(startGame.bind(null, true), LONG_DELAY));
+
+				// workaround
+				errorSound.play();
+				setTimeout(startGame.bind(null, true), LONG_DELAY + errorSound.duration * 1000);
 			} else {
 				simonGame.pause();
 				display.textContent = "!!";
 				// restart current round
-				errorSound.play().then(()=>setTimeout(startGame, LONG_DELAY));
+
+				// bugged in Firefox
+				// errorSound.play().then(()=>setTimeout(startGame, LONG_DELAY));
+
+				// workaround
+				errorSound.play();
+				setTimeout(startGame, LONG_DELAY + errorSound.duration * 1000);
 			}
 
 			return false;
