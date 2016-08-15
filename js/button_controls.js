@@ -4,6 +4,9 @@ const strict = document.getElementById('strict');
 const display = document.getElementById('display');
 const outer = document.getElementById('outer');
 
+const VICTORY_SEQUENCE = [[1,2],[0,3],[0,1,2,3]];
+const FINAL_ROUND = 20, DELAY = 1000, LONG_DELAY = 1700;
+
 
 const simonGame = new SequenceGame(corners.length);
 let turnGenerator;
@@ -29,7 +32,7 @@ start.addEventListener("click", function (e) {
 
 	stopAnimations();
 
-	setTimeout(startGame.bind(null, true), 1000);
+	setTimeout(startGame.bind(null, true), DELAY);
 });
 
 function userTurn(ind) {
@@ -43,19 +46,24 @@ function userTurn(ind) {
 				simonGame.stop();
 				display.textContent = "!!";
 				// restart from round 1
-				errorSound.play().then(()=>setTimeout(startGame.bind(null, true), 1700));
+				errorSound.play().then(()=>setTimeout(startGame.bind(null, true), LONG_DELAY));
 			} else {
 				simonGame.pause();
 				display.textContent = "!!";
 				// restart current round
-				errorSound.play().then(()=>setTimeout(startGame, 1700));
+				errorSound.play().then(()=>setTimeout(startGame, LONG_DELAY));
 			}
 
 			return false;
+		} else if(value === FINAL_ROUND + 1) {
+			// finished round 20 => victory
+			simonGame.stop();
+
+			setTimeout(playVictorySequence, DELAY);
 		} else {
 			simonGame.pause();
 			// start next round after a delay;
-			setTimeout(startGame, 1700);
+			setTimeout(startGame, LONG_DELAY);
 		}
 	}
 
@@ -77,4 +85,17 @@ function startGame(reset = false) {
 
 		turnGenerator = simonGame.play();
 	});
+}
+
+function playVictorySequence() {
+	animateChain2(...VICTORY_SEQUENCE);
+	let rounds = FINAL_ROUND;
+	const interval = setInterval(() => {
+		if(--rounds === 0) {
+			display.textContent = "--";
+			clearInterval(interval);
+			return;
+		}
+		display.textContent = rounds < 10 ? "0" + rounds : rounds;
+	}, ANIMATION_DURATION * VICTORY_SEQUENCE.length / FINAL_ROUND);
 }

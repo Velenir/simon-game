@@ -1,9 +1,10 @@
 const corners = document.querySelectorAll(".outer__corner");
+const ANIMATION_DURATION = 1000;
 
 function attachAnimations() {
 
 	const timings = {
-		duration: 1000
+		duration: ANIMATION_DURATION
 		// fill: 'both',
 		// direction: 'alternate',
 		// iterations: Infinity
