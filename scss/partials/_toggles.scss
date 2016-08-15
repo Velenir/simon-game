@@ -4,6 +4,8 @@
 }
 
 .toggle {
+	pointer-events: auto;
+
 	input[type="checkbox"] {
 		display: none;
 	}
