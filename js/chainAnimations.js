@@ -25,31 +25,44 @@ function animateChain2(...cornerNumbers) {
 	let chainPromise = Promise.resolve();
 
 	// chain promises that will get resolved on animation finish
-	for(let num of cornerNumbers) {
-		const {animPlayer, soundPlayer} = corners[num];
+	for(let nums of cornerNumbers) {
+		if(!Array.isArray(nums)) {
+			nums = [nums];
+		} else {
+			// filter out duplicates
+			nums = nums.filter((el, i, a) => a.indexOf(el) === i);
+		}
+		const players = nums.map((n) => {
+			const {animPlayer, soundPlayer} = corners[n];
+			return {animPlayer, soundPlayer};
+		});
+		// console.log("players", players);
 
 		chainPromise = chainPromise.then(() => {
 			if(animationStopped) {
-				console.log("STOPPED BEFORE", animPlayer.effect.target);
 				throw new Error("Animation interrupted");
 			}
-			console.log("START ON", animPlayer.effect.target);
-			// previous promise resolved, start next animation
-			animPlayer.play();
-			soundPlayer.play();
 
-			// asynchrously create next promise at the point when it's needed
-			// creating all promises in the loop and then chaining wouldn't allow for same corner to appear twice
-			// as .onfinish would get overwritten
-			return new Promise(function (resolve) {
-				animPlayer.onfinish = resolve;
-			})	// reset finish event handler
-			.then(() => animPlayer.onfinish = null);
+			const promises = [];
+			for(let {animPlayer, soundPlayer} of players) {
+				// console.log("PLAYING ANIM", animPlayer);
+				animPlayer.play();
+				// console.log("PLAYING SOUND", soundPlayer);
+				soundPlayer.play();
+
+				// asynchrously create next promise at the point when it's needed
+				// creating all promises in the loop and then chaining wouldn't allow for same corner to appear twice
+				// as .onfinish would get overwritten
+
+				promises.push(new Promise(function (resolve) {
+					animPlayer.onfinish = resolve;
+				})	// reset finish event handler
+				.then(() => animPlayer.onfinish = null));
+			}
+
+			return Promise.all(promises);
 		});
 	}
-
-	// start the chain
-	corners[cornerNumbers[0]].animPlayer.play();
 
 	return chainPromise.then(() => {return {finished: true};})
 		.catch(err => {
