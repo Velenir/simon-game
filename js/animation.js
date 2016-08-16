@@ -5,9 +5,6 @@ function attachAnimations() {
 
 	const timings = {
 		duration: ANIMATION_DURATION
-		// fill: 'both',
-		// direction: 'alternate',
-		// iterations: Infinity
 	};
 
 	const partialKeyframes = [

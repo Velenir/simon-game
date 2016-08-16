@@ -16,6 +16,7 @@ const src = {
 	scssPartials: 'scss/partials/*.scss',
 	jade: '*.jade',
 	jadePartials: 'partials/*jade',
+	// game.js with class definition first
 	js: ['js/game.js', 'js/*.js']
 };
 

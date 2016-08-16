@@ -50,6 +50,7 @@
 		padding: 12px;
 
 		> * {
+			// to allaw for pass through to .corners
 			pointer-events: none;
 		}
 	}

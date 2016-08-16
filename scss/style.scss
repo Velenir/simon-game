@@ -28,15 +28,9 @@ label {
 	cursor: pointer;
 }
 
-// REMOVE
-
-div, p, span {
-	// outline: 1px dotted black;
-}
-
 @import "partials/fonts";
 @import "variables";
-@import 'partials/outer', 'partials/controls', 'partials/toggles';
+@import "partials/outer", "partials/controls", "partials/toggles";
 
 body {
 	background-color: $body-color;
