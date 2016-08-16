@@ -5,7 +5,7 @@ const display = document.getElementById('display');
 const outer = document.getElementById('outer');
 
 const VICTORY_SEQUENCE = [[1,2],[0,3],[0,1,2,3]];
-const FINAL_ROUND = 3, DELAY = 1000, LONG_DELAY = 1700;
+const FINAL_ROUND = 20, DELAY = 1000, LONG_DELAY = 1700;
 
 
 const simonGame = new SequenceGame(corners.length);
@@ -13,18 +13,12 @@ let turnGenerator;
 
 // turn whole game on/off
 power.addEventListener("change", function (e) {
-	console.log(this, "changed", this.checked);
 	display.textContent = this.checked ? "--" : "";
 	outer.classList.toggle("on", this.checked);
 
 	simonGame.stop();
 	clearInterval(interval);
 	chainAnimations.stopAnimations();
-});
-
-// strict mode on/off
-strict.addEventListener("change", function (e) {
-	console.log(this, "changed", this.checked);
 });
 
 // start and restart game
