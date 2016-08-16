@@ -1,2 +1,2 @@
-# TwitchTV
-A simple page showcasing TwitchTV JSON API usage, made as part of FreeCodeCamp course.
+# Simon Game
+A simple implementation of Simon Game, made as part of FreeCodeCamp course.
