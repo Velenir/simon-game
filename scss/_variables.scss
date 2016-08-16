@@ -1,3 +1,39 @@
-$corner-margin: 6px;
-$outer-size: 600px;
-$controls-size: 50%;
+$corner-margin: 6px !default;
+$outer-size: 600px !default;
+$controls-size: 50% !default;
+
+$body-color: #6d695c !default;
+$body-background-size: 70px 120px !default;
+$body-pattern: repeating-linear-gradient(120deg, rgba(255, 255, 255, .1), rgba(255, 255, 255, .1) 1px, transparent 1px, transparent 60px),
+	repeating-linear-gradient(60deg, rgba(255, 255, 255, .1), rgba(255, 255, 255, .1) 1px, transparent 1px, transparent 60px),
+	linear-gradient(60deg, rgba(0, 0, 0, .1) 25%, transparent 25%, transparent 75%, rgba(0, 0, 0, .1) 75%, rgba(0, 0, 0, .1)),
+	linear-gradient(120deg, rgba(0, 0, 0, .1) 25%, transparent 25%, transparent 75%, rgba(0, 0, 0, .1) 75%, rgba(0, 0, 0, .1)) !default;
+
+$outer-color: #333 !default;
+
+$center-color: #4297aa !default;
+$center-text-color: #b0c2c5 !default;
+$center-text-shadow: 1px 0 1px #5c8c96, -1px 0 1px #4e7882, 0 1px 1px #5c8c96, 0 -1px 1px #4e7882 !default;
+
+$lamp-color: yellow !default;
+
+$corner-colors: (
+	top-left: #00a74a,
+	top-right: #9f0f17,
+	bottom-right: #094a8f,
+	bottom-left: #cca707
+) !default;
+
+$font: monospace !default;
+$display-font: "LED BOARD REVERSED", $font !default;
+$display-color: black !default;
+$display-text-color: red !default;
+
+$button-color: #b08894 !default;
+$button-active-color: #8e5d6c !default;
+$button-border-color: wheat !default;
+$button-shadow-color: black !default;
+
+$power-tumbler-color: #3193DE !default;
+$power-tumbler-border-color: #b0c2c5 !default;
+$power-tumbler-shadow-color: white !default;
