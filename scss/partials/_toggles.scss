@@ -23,13 +23,13 @@
 		width: 1.5rem;
 		display: inline-block;
 		background-color: #b08894;
-		box-shadow: 0 0 8px 2px gray;
+		box-shadow: 0 0 8px 2px gray, 0 0 0 2px black, inset 0 0 0 black;
 		margin-bottom: 14px;
 		transition: all 0.2s;
 	}
 
 	&--start__button:active {
-		box-shadow: 0 0 8px 2px gray, inset 0 0 5px black;
+		box-shadow: 0 0 3px 1px gray, 0 0 0 black, inset 0 0 5px black;
 		background-color: #8e5d6c;
 	}
 
@@ -37,7 +37,7 @@
 		vertical-align: text-bottom;
 
 		.outer.on input[type="checkbox"]:checked + &, &:active {
-			box-shadow: 0 0 8px 2px gray, inset 0 0 5px black;
+			box-shadow: 0 0 3px 1px gray, 0 0 0 black, inset 0 0 5px black;
 			background-color: yellow;
 		}
 	}
