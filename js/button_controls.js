@@ -18,7 +18,7 @@ power.addEventListener("change", function (e) {
 	outer.classList.toggle("on", this.checked);
 
 	simonGame.stop();
-	stopAnimations();
+	chainAnimations.stopAnimations();
 });
 
 // strict mode on/off
@@ -30,7 +30,7 @@ strict.addEventListener("change", function (e) {
 start.addEventListener("click", function (e) {
 	simonGame.stop();
 
-	stopAnimations();
+	chainAnimations.stopAnimations();
 
 	setTimeout(startGame.bind(null, true), DELAY);
 });
@@ -89,7 +89,7 @@ function startGame(reset = false) {
 
 	display.textContent = simonGame.round < 10 ? "0" + simonGame.round : simonGame.round;
 
-	animateChain2(...simonGame.sequence).then((res) => {
+	chainAnimations.animateChain2(...simonGame.sequence).then((res) => {
 		console.log("RES", res);
 		if(res && res.interrupted) return;
 		if(reset) simonGame.start();
@@ -101,7 +101,7 @@ function startGame(reset = false) {
 }
 
 function playVictorySequence() {
-	animateChain2(...VICTORY_SEQUENCE);
+	chainAnimations.animateChain2(...VICTORY_SEQUENCE);
 	let rounds = FINAL_ROUND;
 	const interval = setInterval(() => {
 		if(--rounds === 0) {
