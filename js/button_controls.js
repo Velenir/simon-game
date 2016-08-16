@@ -5,7 +5,7 @@ const display = document.getElementById('display');
 const outer = document.getElementById('outer');
 
 const VICTORY_SEQUENCE = [[1,2],[0,3],[0,1,2,3]];
-const FINAL_ROUND = 20, DELAY = 1000, LONG_DELAY = 1700;
+const FINAL_ROUND = 3, DELAY = 1000, LONG_DELAY = 1700;
 
 
 const simonGame = new SequenceGame(corners.length);
@@ -18,6 +18,7 @@ power.addEventListener("change", function (e) {
 	outer.classList.toggle("on", this.checked);
 
 	simonGame.stop();
+	clearInterval(interval);
 	chainAnimations.stopAnimations();
 });
 
@@ -30,6 +31,7 @@ strict.addEventListener("change", function (e) {
 start.addEventListener("click", function (e) {
 	simonGame.stop();
 
+	clearInterval(interval);
 	chainAnimations.stopAnimations();
 
 	setTimeout(startGame.bind(null, true), DELAY);
@@ -100,10 +102,11 @@ function startGame(reset = false) {
 	});
 }
 
+let interval;
 function playVictorySequence() {
 	chainAnimations.animateChain2(...VICTORY_SEQUENCE);
 	let rounds = FINAL_ROUND;
-	const interval = setInterval(() => {
+	interval = setInterval(() => {
 		if(--rounds === 0) {
 			display.textContent = "--";
 			clearInterval(interval);
